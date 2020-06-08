@@ -1,52 +1,46 @@
+const radius = 20;
+const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
 var context;
-var radius = 10;
+var count = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const vertices = {
-    1: [
-      { x: 310, y: 310, letter: 'a'},
-    ],
-    2: [
-      { x: 150, y: 310, letter: 'a'},
-      { x: 450, y: 310, letter: 'b'},
-    ],
-    3: [
-      { x: 310, y: 150, letter: 'a'},
-      { x: 495, y: 405, letter: 'b'},
-      { x: 125, y: 405, letter: 'c'},
-    ],
-  };
+  const letter = alphabet.split('');
 
   const screen = document.querySelector('canvas');
-   
-  const style = window.getComputedStyle(screen);
+  
+  screen.width = 600;
+  screen.height = 600;
+
   context = screen.getContext('2d');
 
-  screen.width = style.width.replace('px', '');
-  screen.height = style.height.replace('px', '');
-  
-  // Por clique no canvas
-  // screen.onmousedown = (event) => {
-  //   if (event.clientX + radius * 2 > screen.width || event.clientY + radius * 2 > screen.height) {
-  //     alert('Fora da área! Tente novamente.');
-  //     return;
-  //   }
+  context.textAlign = "center";
+  context.lineWidth = 0.5;
+  context.textBaseline = "middle";
+  context.font = `${radius}px sans serif`;
 
-  //   generateCyrcle(context, event.clientX, event.clientY, radius, 'a');
-    
-  //   console.log(event.clientX - radius, event.clientY - radius)
-  // }
-  
-  vertices[1].map(vertice => (
-    generateCyrcle(context, vertice.x, vertice.y, radius, vertice.letter)
-  ));
+  screen.addEventListener('click', (event) => {
+    const clientClick = {
+      x: event.clientX,
+      y: event.clientY,
+    };
 
+    console.log(clientClick);
+
+    generateCyrcle(context, clientClick.x, clientClick.y, radius, letter);
+  }, true);
 });
 
-// Por campo e ação de botão no html
 const generateCyrcle = (context, positionX, positionY, radiusCyrcle, letter) => {
+  if (!letter[count]) {
+    alert('Fim de caracteres');
+    return;
+  }
+
   context.beginPath();
-  context.arc(positionX - radius, positionY - radius, radiusCyrcle, 0, 2  * Math.PI);
-  letter && context.strokeText(letter, positionX - radius * 1.2, positionY - radius * 0.8);
+  context.arc(positionX, positionY, radiusCyrcle, 0, 2  * Math.PI);
+  letter && context.strokeText(letter[count], positionX, positionY);
   context.stroke();
+
+  count++;
 };

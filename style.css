@@ -3,10 +3,17 @@
    padding: 0;
  }
 
+ body {
+   padding: 10px;
+ }
+
  #screen {
    width: 620px;
    height: 620px;
 
    border: 1px solid;
-   margin: 10px;
+ }
+
+ #screen:hover {
+   box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
  }
