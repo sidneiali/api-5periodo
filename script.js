@@ -1,5 +1,6 @@
 const radius = 20;
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+const data = [];
 
 var context;
 var count = 0;
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   context = screen.getContext('2d');
 
   context.textAlign = "center";
-  context.lineWidth = 0.5;
+  context.lineWidth = 1;
   context.textBaseline = "middle";
   context.font = `${radius}px sans serif`;
 
@@ -25,9 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
       y: event.clientY,
     };
 
-    console.log(clientClick);
+    if (event.ctrlKey) {
+      clearCanvas();
+      return;
+    }
 
     generateCyrcle(context, clientClick.x, clientClick.y, radius, letter);
+
+    console.log(data);
   }, true);
 });
 
@@ -38,9 +44,24 @@ const generateCyrcle = (context, positionX, positionY, radiusCyrcle, letter) => 
   }
 
   context.beginPath();
-  context.arc(positionX, positionY, radiusCyrcle, 0, 2  * Math.PI);
-  letter && context.strokeText(letter[count], positionX, positionY);
+  context.imageSmoothingEnabled = true;
+  context.arc(positionX - radiusCyrcle, positionY - radiusCyrcle, radiusCyrcle, 0, 2  * Math.PI);
+  letter && context.strokeText(letter[count], positionX - radiusCyrcle, positionY - radiusCyrcle);
   context.stroke();
+
+  const dataCyrcle = {
+    letter: letter[count],
+    x: positionX,
+    y: positionX,
+  }
+
+  data.push(dataCyrcle);
 
   count++;
 };
+
+const clearCanvas = () => {
+  context.clearRect(0, 0, screen.width, screen.height);
+  data.length = 0;
+  count = 0;
+}
