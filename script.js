@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const letter = alphabet.split('');
 
   const screen = document.querySelector('canvas');
+  const firtValue = document.querySelector('#firtValue');
+  const finalValue = document.querySelector('#finalValue');
   
   screen.width = 600;
   screen.height = 600;
@@ -29,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (event.ctrlKey) {
       clearCanvas();
+      firtValue.value = '';
+      finalValue.value = '';
       return;
     }
 
@@ -87,5 +91,6 @@ const generateLine = (context, startingPosition, finalPosition) => {
 const clearCanvas = () => {
   context.clearRect(0, 0, screen.width, screen.height);
   dataCyrcle.length = 0;
+  dataLine.length = 0;
   countCyrcle = 0;
 }
