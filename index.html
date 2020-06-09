@@ -9,7 +9,32 @@
 </head>
 <body>
   <div class="container">
-    <canvas id="screen"></canvas>
+    <div class="content">
+      <canvas id="screen"></canvas>
+      <div id="options">
+        <div id="edge">
+          <div id="content-edge">
+            <label for="firstValue">Vertíce Inicial</label>
+            <input type="text" name="firtValue" id="firtValue">
+          </div>
+          
+          <div id="content-edge">
+            <label for="finalValue">Vertice Final</label>
+            <input type="text" name="finalValue" id="finalValue">
+          </div>
+        </div>
+        <button id="edgeButton" type="submit" onclick="generateEdge()">Gerar Aresta</button>
+      </div>
+    </div>
   </div>
+
+  <script>
+    const firtValue = document.querySelector('#firtValue');
+    const finalValue = document.querySelector('#finalValue');
+    
+    function generateEdge() {
+      generateLine(context, firtValue.value, finalValue.value);
+    }
+  </script>
 </body>
 </html>
