@@ -23,18 +23,16 @@
             <input type="text" name="finalValue" id="finalValue">
           </div>
         </div>
-        <button id="edgeButton" type="submit" onclick="generateEdge()">Gerar Aresta</button>
+        <button id="edgeButton" type="submit" onclick="generateLine(context, firtValue.value, finalValue.value)">Gerar Aresta</button>
+        <button id="edgeButton" type="submit" onclick="clearCanvas()">Limpar</button>
+        <div class="data">
+          <label for="content-degree">Grau</label>
+          <div id="data-degree">
+            <ul id="list-degree"></ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <script>
-    const firtValue = document.querySelector('#firtValue');
-    const finalValue = document.querySelector('#finalValue');
-    
-    function generateEdge() {
-      generateLine(context, firtValue.value, finalValue.value);
-    }
-  </script>
 </body>
 </html>
