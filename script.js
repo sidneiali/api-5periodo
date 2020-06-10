@@ -66,11 +66,11 @@ const generateCyrcle = (context, positionX, positionY, radiusCyrcle, letter) => 
   }
 
   if (letter[countCyrcle]) {
-    const li = document.createElement('li');
-    li.setAttribute('id', 'li-list-degree');
-    const textList = document.createTextNode(`${letter[countCyrcle]}: 0`);
-    li.appendChild(textList);
-    listDegree.appendChild(li); 
+    const span = document.createElement('span');
+    span.setAttribute('id', 'span-list-degree');
+    const textList = document.createTextNode(`${letter[countCyrcle]}: 0; `);
+    span.appendChild(textList);
+    listDegree.appendChild(span); 
   }
 
   dataCyrcle.push(objectCyrcle);
@@ -110,18 +110,20 @@ const generateLine = (context, startingLetter, finalLetter) => {
     
     dataLine.push(objectLine);
 
-    const liListDegree = document.querySelectorAll('#li-list-degree');
+    const liListDegree = document.querySelectorAll('#span-list-degree');
     
     dataCyrcle.map(cyrcle => {
       if ((cyrcle.letter === objectLine.start || cyrcle.letter === objectLine.final) 
       && (objectLine.start !== objectLine.final)) {
         cyrcle.degree++;
       }
-      liListDegree[countLi].innerText = `${cyrcle.letter}: ${cyrcle.degree}`;
+      liListDegree[countLi].innerText = `${cyrcle.letter}: ${cyrcle.degree}; `;
       countLi++;
     });
   }
 
+  firtValue.value = '';
+  finalValue.value = ''; 
   
   console.log('Aresta: ', dataLine);
   console.log('Vertice: ', dataCyrcle);

@@ -27,7 +27,7 @@ body {
 }
 
 #options {
-  width: 320px;
+  width: 325px;
   height: auto;
   padding: 5px;
 
@@ -72,6 +72,11 @@ body {
 }
 
 #list-degree {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#span-list-degree {
   list-style: none;
   padding: 5px;
 }
